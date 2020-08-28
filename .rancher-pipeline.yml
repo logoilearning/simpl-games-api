@@ -1,0 +1,15 @@
+stages:
+- name: build
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: logoi/simpl-games-api:master
+timeout: 60
+notification:
+  recipients:
+  - recipient: '#logoi-cd'
+    notifier: c-cd5hs:n-gpk2r
+  condition:
+  - Success
+  - Failed
