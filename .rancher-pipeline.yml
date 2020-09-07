@@ -4,7 +4,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: logoi/simpl-games-api:master
+      tag: logoi/simpl-games-api:${CICD_GIT_BRANCH}
 timeout: 60
 notification:
   recipients:
