@@ -53,6 +53,10 @@ django-redis==4.8.0
 # Celery support (needed for Thorn)
 celery<=4.2
 
+# specify vine version
+# https://stackoverflow.com/questions/32757259/celery-no-module-named-five
+vine==1.3.0
+
 thorn==1.5.0
 
 # Wharton styles
