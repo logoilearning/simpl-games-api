@@ -23,9 +23,9 @@ ENV PYTHONPATH /code:$PYTHONPATH
 
 EXPOSE 8000
 
-ENTRYPOINT ["/tini", "--"]
+# ENTRYPOINT ["/tini", "--"]
 
-CMD ["gunicorn", "-c", "/code/gunicorn.conf", "config.wsgi"]
-
+# CMD ["gunicorn", "-c", "/code/gunicorn.conf", "config.wsgi"]
+CMD ["/bin/bash" "start.sh"]
 
 LABEL Description="Image for simpl-games-api" Vendor="Wharton" Version="0.7.20"
