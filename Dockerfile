@@ -1,31 +1,51 @@
-From gladiatr72/just-tini:latest as tini
+# From gladiatr72/just-tini:latest as tini
 
-FROM revolutionsystems/python:3.6.5-wee-optimized-lto
+# FROM revolutionsystems/python:3.6.5-wee-optimized-lto
 
 
+# ENV PYTHONUNBUFFERED 1
+
+# COPY ./requirements.txt ./code/requirements.txt
+
+# RUN apt update \
+#         && apt-get -y install libjpeg62-turbo-dev zlib1g-dev gcc make \
+#         && apt-mark manual libjpeg62-turbo zlib1g \
+#     && pip install -r /code/requirements.txt; pip install python-memcached \
+#     && apt-get -y remove libjpeg62-turbo-dev zlib1g-dev gcc make \
+#     && apt-get -y autoremove \
+#     && rm -rf /var/lib/apt/lists/* /usr/share/man /usr/local/share/man \
+#     && find /usr -type f -regex "*.py[co]$" -exec rm -r {} +
+
+# COPY --from=tini /tini /tini
+# ADD . /code/
+# WORKDIR /code
+# ENV PYTHONPATH /code:$PYTHONPATH
+
+# EXPOSE 8000
+
+# ENTRYPOINT ["/tini", "--"]
+
+# CMD ["gunicorn", "-c", "/code/gunicorn.conf", "config.wsgi"]
+
+
+# LABEL Description="Image for simpl-games-api" Vendor="Wharton" Version="0.7.20"
+
+
+# Python 3.6 base
+FROM python:3.6
+RUN pip install --upgrade pip
+
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/requirements.txt
+RUN pip install -r requirements.txt
+
+ADD . /code/
+# RUN python manage.py migrate
+
+ENV PYTHONPATH /code:$PYTHONPATH
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt ./code/requirements.txt
-
-RUN apt update \
-        && apt-get -y install libjpeg62-turbo-dev zlib1g-dev gcc make \
-        && apt-mark manual libjpeg62-turbo zlib1g \
-    && pip install -r /code/requirements.txt; pip install python-memcached \
-    && apt-get -y remove libjpeg62-turbo-dev zlib1g-dev gcc make \
-    && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/* /usr/share/man /usr/local/share/man \
-    && find /usr -type f -regex "*.py[co]$" -exec rm -r {} +
-
-COPY --from=tini /tini /tini
-ADD . /code/
-WORKDIR /code
-ENV PYTHONPATH /code:$PYTHONPATH
-
-EXPOSE 8000
-
-ENTRYPOINT ["/tini", "--"]
-
-CMD ["gunicorn", "-c", "/code/gunicorn.conf", "config.wsgi"]
-
-
-LABEL Description="Image for simpl-games-api" Vendor="Wharton" Version="0.7.20"
+# Start and listen on 8000
+EXPOSE 8100
+CMD ["/bin/bash", "start.sh"]
