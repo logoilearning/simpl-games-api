@@ -44,10 +44,11 @@ ADD requirements.txt /code/requirements.txt
 RUN pip install -r requirements.txt
 
 ADD . /code/
-# RUN python manage.py migrate
 
 ENV PYTHONPATH /code:$PYTHONPATH
 ENV PYTHONUNBUFFERED 1
+
+# RUN python manage.py migrate
 
 # Start and listen on 8000
 EXPOSE 8100
