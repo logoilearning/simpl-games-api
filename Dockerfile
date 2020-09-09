@@ -1,5 +1,7 @@
 # From gladiatr72/just-tini:latest as tini
 
+## START ORIGINAL SIMPL
+
 # FROM revolutionsystems/python:3.6.5-wee-optimized-lto
 
 
@@ -30,6 +32,7 @@
 
 # LABEL Description="Image for simpl-games-api" Vendor="Wharton" Version="0.7.20"
 
+## END ORIGINAL SIMPL
 
 # Python 3.6 base
 FROM python:3.6
