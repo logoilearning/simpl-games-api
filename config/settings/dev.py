@@ -13,9 +13,8 @@ env = environ.Env(
 )
 
 SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = [
-    'localhost',
-]
+DEBUG = True
+ALLOWED_HOSTS = []
 
 ROLLBAR['environment'] = 'development'
 
