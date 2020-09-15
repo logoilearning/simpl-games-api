@@ -13,9 +13,11 @@ env = environ.Env(
 )
 
 SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = [
-    'localhost',
-]
+# ALLOWED_HOSTS = [
+#     'localhost',
+# ]
+
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost','api'])
 
 ROLLBAR['environment'] = 'development'
 
