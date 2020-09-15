@@ -50,6 +50,7 @@ ENV PYTHONUNBUFFERED 1
 
 # RUN python manage.py migrate
 
+RUN mkdir staticfiles
 # Start and listen on 8000
 EXPOSE 8100
 CMD ["/bin/bash", "start.sh"]
